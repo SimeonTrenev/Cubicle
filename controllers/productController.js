@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-
+const Cube = require("../models/Cube");
 
 //First option to routh
 // const index = (req, res) => {
@@ -11,22 +11,27 @@ const router = Router();
 
 //Secont option to routh
 
-router.get('/', (req, res) => {
-    res.render('home', {title : 'Browse'})
-})
+router.get("/", (req, res) => {
+  res.render("home", { title: "Browse" });
+});
 
-router.get('/create', (req, res) => {
-    res.render('create', {title : 'Create'})
-})
+router.get("/create", (req, res) => {
+  res.render("create", { title: "Create" });
+});
 
-router.post('/create', (req, res) => {
-    console.log(req.body)
-    
-})
+router.post("/create", (req, res) => {
+  // console.log(req.body)
 
-router.get('/details/:productId', (req, res) => {
-    console.log(req.params)
-    res.render('details', {title: 'Product Details'})
-})
+  //Validate inputs
+
+  let cube = new Cube(req.body);
+
+  res.redirect("/products");
+});
+
+router.get("/details/:productId", (req, res) => {
+  console.log(req.params);
+  res.render("details", { title: "Product Details" });
+});
 
 module.exports = router;
