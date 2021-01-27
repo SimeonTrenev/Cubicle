@@ -6,6 +6,7 @@ const routes = require('./routes')
 
 expressConfig(app);
 //require('./config/express')(app);
+//require('./config/routes')(app);
 
 app.use(routes)
 

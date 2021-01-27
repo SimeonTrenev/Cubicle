@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const Cube = require("../models/Cube");
+const productService = require('../services/productService')
 
 //First option to routh
 // const index = (req, res) => {
@@ -22,9 +22,9 @@ router.get("/create", (req, res) => {
 router.post("/create", (req, res) => {
   // console.log(req.body)
 
-  //Validate inputs
+  //TODO : Validate inputs
 
-  let cube = new Cube(req.body);
+  productService.create(req.body)
 
   res.redirect("/products");
 });
