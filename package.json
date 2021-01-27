@@ -1,0 +1,27 @@
+{
+  "name": "Cubicle",
+  "version": "1.0.0",
+  "description": "\"Cubicle\" is a place, where you can browse some of the most popular rubik cubes in the world and add some new cubes that you have discovered.",
+  "main": "index.js",
+  "scripts": {
+    "start": "SET NODE_ENV=development && nodemon ./index.js",
+    "prod": "SET NODE_ENV=production && node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimeonTrenev/Cubicle.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SimeonTrenev/Cubicle/issues"
+  },
+  "homepage": "https://github.com/SimeonTrenev/Cubicle#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
