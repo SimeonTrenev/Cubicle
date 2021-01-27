@@ -12,11 +12,11 @@ const router = Router();
 //Secont option to routh
 
 router.get('/', (req, res) => {
-    res.render('home')
+    res.render('home', {title : 'Browse'})
 })
 
 router.get('/create', (req, res) => {
-    res.render('create')
+    res.render('create', {title : 'Create'})
 })
 
 module.exports = router;
