@@ -46,5 +46,5 @@ fs.writeFile(__dirname +  '/../config/products.json', JSON.stringify(productsDat
 
 module.exports = {
     create,
-    validateCube
+    getAll
 }
