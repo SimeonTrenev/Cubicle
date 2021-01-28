@@ -12,7 +12,7 @@ function getOne(id) {
   return productsData.find(x => x.id == id)
 }
 
-function create(data) {
+function create(data, callback) {
   let { name, description, imageUrl, difficultyLevel } = data;
 
   let cube = new Cube(uniqId(), name, description, imageUrl, difficultyLevel);
@@ -26,12 +26,15 @@ function create(data) {
   fs.writeFile(
    path.join(__dirname, "../config/products.json") ,
     JSON.stringify(productsData),
-    (err) => {
-      if (err) {
-        console.log(err);
-        return;
-      }
-    }
+    callback
+    // (err) => {
+    //   if (err) {
+    //     console.log(err);
+    //     return;
+    //   }
+
+    //   callback()
+    // }
   );
 }
 
