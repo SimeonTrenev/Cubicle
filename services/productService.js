@@ -1,6 +1,9 @@
 const Cube = require("../models/Cube");
 const uniqId = require("uniqid");
 const fs = require("fs");
+// const fs = require("fs/promises"); authomatic promises
+// const fs = require('fs').promises // for my old version of node.js
+
 let productsData = require("../config/products.json");
 const path = require('path')
 
@@ -33,9 +36,14 @@ function create(data, callback) {
     //     return;
     //   }
 
-    //   callback()
-    // }
+  //   //   callback()
+  //   // }
   );
+
+  //Promise authomatic
+//  return fs.writeFile(path.join(__dirname, "../config/products.json") ,
+//   JSON.stringify(productsData),
+//   )
 }
 
 

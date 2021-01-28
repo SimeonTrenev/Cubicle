@@ -34,7 +34,13 @@ router.post("/create", validateProduct,  (req, res) => {
 
     res.redirect("/products");
   })
+
   // productService.validateCube(req.body)
+
+  //if we use authomatic promises
+  // productService.create(req.body)
+  //   .then(() => res.redirect('/products'))
+  //   .catch(() => res.status(500).end())
 
   
 });
