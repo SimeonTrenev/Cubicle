@@ -5,14 +5,28 @@ const fs = require("fs");
 // const fs = require('fs').promises // for my old version of node.js
 
 let productsData = require("../config/products.json");
-const path = require('path')
+const path = require("path");
 
-function getAll() {
-  return productsData;
+function getAll(query) {
+  let result = productsData;
+
+  if(query.search){
+    result = result.filter(x => x.name.toLowerCase().includes(query.search))
+  }
+
+  if(query.from){
+    result = result.filter(x => Number(x.level) >= Number(query.from))
+  }
+
+  if(query.to){
+    result = result.filter(x => Number(x.level) <= Number(query.to))
+  }
+
+  return result;
 }
 
 function getOne(id) {
-  return productsData.find(x => x.id == id)
+  return productsData.find((x) => x.id == id);
 }
 
 function create(data, callback) {
@@ -27,7 +41,7 @@ function create(data, callback) {
   // console.log(path.resolve("../config/products.json"))
 
   fs.writeFile(
-   path.join(__dirname, "../config/products.json") ,
+    path.join(__dirname, "../config/products.json"),
     JSON.stringify(productsData),
     callback
     // (err) => {
@@ -36,20 +50,18 @@ function create(data, callback) {
     //     return;
     //   }
 
-  //   //   callback()
-  //   // }
+    //   //   callback()
+    //   // }
   );
 
   //Promise authomatic
-//  return fs.writeFile(path.join(__dirname, "../config/products.json") ,
-//   JSON.stringify(productsData),
-//   )
+  //  return fs.writeFile(path.join(__dirname, "../config/products.json") ,
+  //   JSON.stringify(productsData),
+  //   )
 }
-
-
 
 module.exports = {
   create,
   getAll,
-  getOne
+  getOne,
 };
