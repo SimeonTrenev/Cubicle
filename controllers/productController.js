@@ -30,20 +30,20 @@ router.post("/create", validateProduct,  (req, res) => {
 
   //TODO : Validate inputs
 
-  productService.create(req.body, (err) => {
-    if(err){
-      return res.status(500).end();
-    }
+  // productService.create(req.body, (err) => {
+  //   if(err){
+  //     return res.status(500).end();
+  //   }
 
-    res.redirect("/products");
-  })
+  //   res.redirect("/products");
+  // })
 
   // productService.validateCube(req.body)
 
   //if we use authomatic promises
-  // productService.create(req.body)
-  //   .then(() => res.redirect('/products'))
-  //   .catch(() => res.status(500).end())
+  productService.create(req.body)
+    .then(() => res.redirect('/products'))
+    .catch(() => res.status(500).end())
 
   
 });

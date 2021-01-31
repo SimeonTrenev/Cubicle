@@ -9,7 +9,9 @@ const uniqId = require("uniqid");
 const productData = require('../data/productsData')
 
 function getAll(query) {
-  let products = productData.getAll();
+  // let products = productData.getAll();
+
+  let products = Cube.getAll();
 
   const { search, from, to } = query
 
@@ -31,7 +33,7 @@ function getAll(query) {
 function getOne(id) {
   // return productsData.find((x) => x.id == id);
 
-  return productData.getOne(id)
+  return Cube.getOne(id);
 }
 
 function create(data, callback) {
@@ -59,7 +61,7 @@ function create(data, callback) {
   //   //   // }
   // );
 
-  return productData.create(cube)
+  return cube.save();
   //Promise authomatic
   //  return fs.writeFile(path.join(__dirname, "../config/products.json") ,
   //   JSON.stringify(productsData),

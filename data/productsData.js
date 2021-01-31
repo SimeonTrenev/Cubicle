@@ -1,5 +1,5 @@
-const fs = require("fs");
-const path = require("path").promises;
+const fs = require("fs").promises;;
+const path = require("path")
 const productsDb = require("../config/products.json");
 
 module.exports = {
@@ -12,12 +12,5 @@ module.exports = {
         return productsDb.find(x => x.id == id)
     },
 
-  create(product) {
-    productsDb.push(product);
-
-    return fs.writeFile(
-      path.join(__dirname, "../config/products.json"),
-      JSON.stringify(productsDb)
-    );
-  },
+  
 };
