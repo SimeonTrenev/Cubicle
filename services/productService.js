@@ -1,19 +1,18 @@
 const Cube = require("../models/Cube");
-const uniqId = require("uniqid");
+// const uniqId = require("uniqid");
 // const fs = require("fs");
 // const fs = require("fs/promises"); authomatic promises
 // const fs = require('fs').promises // for my old version of node.js
 
-
 // const path = require("path");
-const productData = require('../data/productsData')
+const productData = require("../data/productsData");
 
 function getAll(query) {
-  // let products = productData.getAll();
+  let products = productData.getAll();
 
-  let products = Cube.getAll();
+  // let products = Cube.getAll();
 
-  const { search, from, to } = query
+  const { search, from, to } = query;
 
   if (search) {
     products = products.filter((x) => x.name.toLowerCase().includes(search));
@@ -33,13 +32,14 @@ function getAll(query) {
 function getOne(id) {
   // return productsData.find((x) => x.id == id);
 
-  return Cube.getOne(id);
+  // return Cube.getOne(id);
+  return productData.getOne(id)
 }
 
 function create(data, callback) {
-  let { name, description, imageUrl, difficultyLevel } = data;
+  // let { name, description, imageUrl, difficultyLevel } = data;
 
-  let cube = new Cube(uniqId(), name, description, imageUrl, difficultyLevel);
+  let cube = new Cube(data);
   //   console.log(cube);
 
   // productsData.push(cube);

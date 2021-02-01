@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const productsDb = require("../config/products.json");
 
-const cubeSchema = new mongoose.Schema({
+const cubeScheme = new mongoose.Schema({
     name : {
         type : String,
         required: true
@@ -22,23 +22,11 @@ const cubeSchema = new mongoose.Schema({
         min : 1,
         max : 6
     },
-    accessories : {
-        type : 
-    }
-})
+    accessories : [{
+        type : mongoose.Types.ObjectId,
+        ref: 'Accessory'
+    }]
+});
 
-class Cube {
-  constructor(id, name, description, imageUrl, level) {
-    this.id = id;
-    this.name = name;
-    this.description = description;
-    this.imageUrl = imageUrl;
-    this.level = level;
-  }
 
- 
-
- 
-}
-
-module.exports = Cube;
+module.exports = mongoose.model('Cube', cubeScheme);
