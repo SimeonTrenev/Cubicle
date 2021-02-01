@@ -9,12 +9,15 @@ const productController = require('./controllers/productController');
 
 const homeController = require('./controllers/homeController')
 
+const accessoryController = require('./controllers/accessoryController')
+
 //First option
 
 // router.get('/', productController.index);
 // router.get('/create', productController.create);
 
 router.use('/products', productController);
+router.use('/accessories', accessoryController)
 router.use('/', homeController);
 router.get('*', (req, res) => {
     res.render('404', {title: 'Not Found'})
