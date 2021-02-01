@@ -1,4 +1,5 @@
 const Cube = require("../models/Cube");
+const Accessory = require('../models/Accessory')
 // const uniqId = require("uniqid");
 // const fs = require("fs");
 // const fs = require("fs/promises"); authomatic promises
@@ -72,8 +73,17 @@ function create(data, callback) {
   //   )
 }
 
+async function attachAccessory(productId, accessoryId){
+  let product = await Cube.findById(productId)
+  let accessory = await Accessory.findById(accessoryId)
+
+  product.accessories.push(accessory)
+  return product.save()
+}
+
 module.exports = {
   create,
   getAll,
   getOne,
+  attachAccessory
 };

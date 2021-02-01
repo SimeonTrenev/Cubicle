@@ -6,7 +6,11 @@ function create(data) {
     return accessory.save();
 }
 
+function getAll(){
+    return Accessory.find().lean();
+}
+
 module.exports = {
     create,
-
+    getAll,
 }
