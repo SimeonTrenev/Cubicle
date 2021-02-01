@@ -5,12 +5,14 @@ const Cube = require("../models/Cube");
 // const fs = require('fs').promises // for my old version of node.js
 
 // const path = require("path");
-const productData = require("../data/productsData");
+// const productData = require("../data/productsData");
 
-function getAll(query) {
-  let products = productData.getAll();
+async function getAll(query) {
+  // let products = productData.getAll();
 
   // let products = Cube.getAll();
+
+  let products =  await Cube.find({}).lean();
 
   const { search, from, to } = query;
 
@@ -33,7 +35,9 @@ function getOne(id) {
   // return productsData.find((x) => x.id == id);
 
   // return Cube.getOne(id);
-  return productData.getOne(id)
+  // return productData.getOne(id)
+
+ return Cube.findById(id).lean();
 }
 
 function create(data, callback) {

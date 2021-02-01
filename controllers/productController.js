@@ -17,8 +17,13 @@ router.get("/", (req, res) => {
 
   // console.log(req.query)
 
-  let products = productService.getAll(req.query)
-  res.render("home", { title: "Browse", products });
+  productService.getAll(req.query)
+    .then(products => {
+      console.log(products)
+      res.render("home", { title: "Browse", products });
+    })
+    .catch(() => res.status(404).end())
+  
 });
 
 router.get("/create", (req, res) => {
@@ -48,9 +53,9 @@ router.post("/create", validateProduct,  (req, res) => {
   
 });
 
-router.get("/details/:productId", (req, res) => {
+router.get("/details/:productId", async (req, res) => {
   console.log(req.params.productId);
-  let product = productService.getOne(req.params.productId)
+  let product = await productService.getOne(req.params.productId)
 
   res.render("details", { title: "Product Details", product });
 });
