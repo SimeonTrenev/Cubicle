@@ -29,6 +29,8 @@ async function getAll(query) {
     products = products.filter((x) => Number(x.level) <= Number(to));
   }
 
+  
+
   return products;
 }
 
@@ -39,6 +41,10 @@ function getOne(id) {
   // return productData.getOne(id)
 
  return Cube.findById(id).lean();
+}
+
+function getOneWithAccessories(id){
+  return Cube.findById(id).populate('accessories').lean()
 }
 
 function create(data, callback) {
@@ -85,5 +91,6 @@ module.exports = {
   create,
   getAll,
   getOne,
-  attachAccessory
+  attachAccessory,
+  getOneWithAccessories
 };
