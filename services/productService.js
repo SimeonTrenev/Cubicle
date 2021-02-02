@@ -21,15 +21,21 @@ async function getAll(query) {
     products = products.filter((x) => x.name.toLowerCase().includes(search));
   }
 
+  // Cube.find({name:}) ...
+
   if (from) {
     products = products.filter((x) => Number(x.level) >= Number(from));
   }
+
+  // Cube.find({difficultyLevel: {$gte: from}})
+  // Cube.find().gte(from)
 
   if (to) {
     products = products.filter((x) => Number(x.level) <= Number(to));
   }
 
-  
+  // Cube.find({difficultyLevel : {$lte: to}})
+  // Cube.find().lte(to)
 
   return products;
 }
