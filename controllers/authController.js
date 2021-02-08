@@ -6,11 +6,15 @@ const router = require('express').Router();
 const authService = require('../services/authService')
 const {COOKIE_NAME} = require('../config')
 
-router.get('/login', (req, res) => { //Sprqmo /auth , tova e putq sled nego
+const isGuest = require('../middlewares/isGuest')
+const isAuthenticated = require('../middlewares/isAuthenticated')
+
+
+router.get('/login', isGuest, (req, res) => { //Sprqmo /auth , tova e putq sled nego
      res.render('login')
 })
 
-router.post('/login', async (req, res) => {
+router.post('/login', isGuest, async (req, res) => {
     const { username, password } = req.body;
 
     try {
@@ -24,11 +28,11 @@ router.post('/login', async (req, res) => {
     }
 })
 
-router.get('/register', (req, res) => {
+router.get('/register', isGuest, (req, res) => {
     res.render('register')
 })
 
-router.post('/register', async (req, res) => {
+router.post('/register', isGuest, async (req, res) => {
     // console.log(req.body)
     const { password, repeatPassword, username } = req.body; 
     
@@ -50,6 +54,11 @@ router.post('/register', async (req, res) => {
     }
 
     // res.redirect('/auth/register')
+});
+
+router.get('/logout', isAuthenticated, (req, res) => {
+    res.clearCookie(COOKIE_NAME)
+    res.redirect('/products')
 })
 
 module.exports = router;

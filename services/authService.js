@@ -41,7 +41,7 @@ const login = async({username, password}) => {
     }
 
     //generate token
-    let token = jwt.sign({ _id: user._id }, SECRET)
+    let token = jwt.sign({ _id: user._id, username: user.username }, SECRET)
 
     return token
 
