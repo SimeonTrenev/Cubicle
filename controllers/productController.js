@@ -22,7 +22,7 @@ router.get("/", (req, res) => {
 
   productService.getAll(req.query)
     .then(products => {
-      console.log(products)
+      // console.log(products)
       res.render("home", { title: "Browse", products });
     })
     .catch(() => res.status(404).end())
