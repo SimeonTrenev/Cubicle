@@ -4,6 +4,7 @@
 
 const router = require('express').Router();
 const authService = require('../services/authService')
+const {COOKIE_NAME} = require('../config')
 
 router.get('/login', (req, res) => { //Sprqmo /auth , tova e putq sled nego
      res.render('login')
@@ -14,8 +15,9 @@ router.post('/login', async (req, res) => {
 
     try {
       let token = await authService.login({username, password})
-        console.log(token);
-      res.end()
+        
+      res.cookie(COOKIE_NAME, token)
+      res.redirect('/products')
     } catch (error) {
         console.log(error)
        res.render('login', {error})
@@ -42,7 +44,7 @@ router.post('/register', async (req, res) => {
     //   console.log(result)
 
 
-        res.redirect('/login')
+        res.redirect('/auth/login')
     } catch (error) {
         res.render('register', {error})
     }

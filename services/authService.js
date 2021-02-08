@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
-const { SALT_ROUNDS } = require('../config')
+const { SALT_ROUNDS, SECRET } = require('../config')
+const jwt = require('jsonwebtoken')
 
 const register = async ({ username, password }) => {
   
@@ -40,7 +41,9 @@ const login = async({username, password}) => {
     }
 
     //generate token
-    return {empty : true}
+    let token = jwt.sign({ _id: user._id }, SECRET)
+
+    return token
 
 }
 
