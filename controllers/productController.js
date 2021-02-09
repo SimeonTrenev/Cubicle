@@ -81,13 +81,28 @@ router.post('/:productId/attach', isAuthenticated, (req, res) => {
 });
 
 router.get('/:productId/edit', isAuthenticated, (req, res) => {
+
   productService.getOne(req.params.productId)
+  .then(product => {
+    if(req.user_id != product.creator){
+      res.redirect('/products')
+    }else{
+      productService.getOne(req.params.productId)
       .then(product => {
         res.render('editCube', product)
       })
+    }
+    
+  });
+
+  
 });
 
 router.post('/:productId/edit', isAuthenticated, validateProduct, (req, res) => {
+
+
+
+
   productService.updateOne(req.params.productId, req.body)
       .then(response => {
         res.redirect(`/products/details/${req.params.productId}`)
@@ -110,9 +125,18 @@ router.get('/:productId/delete', isAuthenticated, (req, res) => {
 });
 
 router.post('/:productId/delete', isAuthenticated,  (req, res) => {
-  productService.deleteOne(req.params.productId)
-      .then(response => res.redirect('/products'))
-      .catch(err => console.log(err))
+  productService.getOne(req.params.productId)
+      .then(product => {
+          if(product._id !== req.user._id){
+           return res.redirect('/products')
+          }
+         return  productService.deleteOne(req.params.productId)
+      })
+       .then(response => res.redirect('/products'))
+          .catch(err => console.log(err))
+
+
+ 
 })
 
 
