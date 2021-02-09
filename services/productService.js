@@ -53,10 +53,10 @@ function getOneWithAccessories(id){
   return Cube.findById(id).populate('accessories').lean()
 }
 
-function create(data, callback) {
+function create(data, userId) {
   // let { name, description, imageUrl, difficultyLevel } = data;
 
-  let cube = new Cube(data);
+  let cube = new Cube({...data, creator: userId});
   //   console.log(cube);
 
   // productsData.push(cube);
@@ -93,10 +93,21 @@ async function attachAccessory(productId, accessoryId){
   return product.save()
 }
 
+function updateOne(productId, productData) {
+  return Cube.updateOne({_id: productId}, productData);
+}
+
+function deleteOne(productId) {
+  return Cube.deleteOne({_id: productId})
+}
+
 module.exports = {
   create,
   getAll,
   getOne,
   attachAccessory,
-  getOneWithAccessories
+  getOneWithAccessories,
+  updateOne,
+  deleteOne,
+
 };
